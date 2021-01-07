@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
-import {UserInputDetails} from './UserInputDetails';
-import {UserDetailsAndMessages} from './UserDetailsAndMessages';
+import {User} from './UserInputDetails';
+import {UserMessages} from './UserDetailsAndMessages';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -14,19 +14,19 @@ export class LogOnService {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-  GetLogOnAttempt(user: UserInputDetails): Observable<UserDetailsAndMessages>{
-    const geturl = `${this.url}?/username=${user.username}&password=${user.password}`
-    return this.http.get<UserDetailsAndMessages>(geturl)
+  GetLogOnAttempt(user: User): Observable<UserMessages>{
+    const geturl = `${this.url}?/username=${user.Username}&password=${user.password}`
+    return this.http.get<UserMessages>(geturl)
     .pipe(
-      catchError(this.handleError<UserDetailsAndMessages>('GetLogOnAttempt'))
+      catchError(this.handleError<UserMessages>('GetLogOnAttempt'))
     );
   }
 
-  PostLogOnAttempt(user: UserInputDetails): Observable<UserDetailsAndMessages>{
+  PostLogOnAttempt(user: User): Observable<UserMessages>{
     user.IsSuccess = true;
     user.UserId = 1;
-    return this.http.post<UserInputDetails>(this.url, user, this.httpOptions).pipe(
-      catchError(this.handleError<UserDetailsAndMessages>('PostLogOnAttempt'))
+    return this.http.post<User>(this.url, user, this.httpOptions).pipe(
+      catchError(this.handleError<UserMessages>('PostLogOnAttempt'))
     );
   }
   private handleError<T>(operation = 'operation', result?: T) {

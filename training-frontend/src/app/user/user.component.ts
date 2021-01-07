@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserInputDetails} from '../UserInputDetails';
-import { UserDetailsAndMessages } from '../UserDetailsAndMessages';
+import { User} from '../UserInputDetails';
+import { UserMessages } from '../UserDetailsAndMessages';
 import { LogOnService } from '../log-on.service';
 import { Observable, of } from 'rxjs';
 
@@ -11,18 +11,18 @@ import { Observable, of } from 'rxjs';
 })
 export class UserComponent implements OnInit {
 
-  user : UserInputDetails = {username:"Username", password:"Password", IsSuccess: true, UserId: 1};
+  user : User = {Username:"Username", password:"Password", IsSuccess: true, UserId: 1};
 
 
   constructor(private logonService: LogOnService) {
 
   }
 
-  postlogon(userdetails: UserInputDetails): Observable<UserDetailsAndMessages>{
+  postlogon(userdetails: User): Observable<UserMessages>{
     return this.logonService.PostLogOnAttempt(userdetails);
   }
 
-  getlogon(userdetails: UserInputDetails): Observable<UserDetailsAndMessages>{
+  getlogon(userdetails: User): Observable<UserMessages>{
         return this.logonService.GetLogOnAttempt(userdetails);
   }
 

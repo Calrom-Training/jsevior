@@ -1,6 +1,6 @@
-export interface UserInputDetails{
+export interface User{
 IsSuccess: boolean;
-username: string;
+Username: string;
 password: string;
 UserId: number;
 }
