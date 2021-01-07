@@ -50,46 +50,47 @@ namespace API_template
                 return result;
             }
         }
-
-        public UserMessages GetMessages(int rowid)
+        /// <summary>
+        /// uses the primary key of the user to find all of their messages.
+        /// </summary>
+        /// <param name="userid">unique identifer of a user.</param>
+        /// <returns>UserMessages object which contains the user name, a success key and a list of all of the messages for the user.</returns>
+        public UserMessages GetMessages(int userid)
         {
             UserMessages result = new UserMessages();
             using (var connection = new SqliteConnection("Data Source=" + this.DBConPath))
             {
-                string MessageTable = "UserMessages";
-                string MessageCriteria = "UserId";
+                string messageTable = "UserMessages";
+                string messageCriteria = "UserId";
                 connection.Open();
                 var command = connection.CreateCommand();
-                string UserId = rowid.ToString();
-                command.CommandText = SqlMessage.Message_builder(MessageTable, MessageCriteria, UserId);
+                string userId = userid.ToString();
+                command.CommandText = SqlMessage.Message_builder(messageTable, messageCriteria, userId);
                 SqliteDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
                 {
-                    bool MoreResults = true;
-                    while (MoreResults)
+                    result.IsSuccess = true;
+                    while (reader.Read())
                     {
-                        result.IsSuccess = true;
-                        while (reader.Read())
-                        {
-                            result.ListUserMessages.Add(new UserMessage(reader.GetString(reader.GetOrdinal("Message")), reader.GetInt32(reader.GetOrdinal("Messageid")).ToString()));
-                            MoreResults = reader.NextResult();
-                        }
+                        result.ListUserMessages.Add(new UserMessage(reader.GetString(reader.GetOrdinal("Message")), reader.GetInt32(reader.GetOrdinal("Messageid")).ToString()));
                     }
                 }
                 else
                 {
                     result.IsSuccess = false;
                 }
+
                 reader.Close();
                 connection.Close();
             }
+
             return result;
         }
 
-        public bool Password_Checker(string FromUI, string FromDB)
+        public bool Password_Checker(string fromUI, string fromDB)
         {
             bool result = false;
-            if (FromDB == FromUI)
+            if (fromDB == fromUI)
             {
                 result = true;
             }

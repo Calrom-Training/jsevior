@@ -1,6 +1,7 @@
-import {UserMessage} from '../UserMessage';
+import {UserMessage} from './UserMessage';
 
-export interface UserDetailsAndMeassages{
+export interface UserDetailsAndMessages{
+  IsSuccess: boolean;
   username: string;
-  Messages: [UserMessage];
+  Messages?: [UserMessage];
 }

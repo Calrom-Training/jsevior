@@ -15,7 +15,7 @@ namespace API_template.Controllers
     public class DatabaseController : ControllerBase
     {
         [HttpPost]
-        public UserMessages logon_attempt(User log_on_attempt)
+        public UserMessages LogOnAttempt(User log_on_attempt)
         {
             DBconnection db = new DBconnection();
             User DatabaseDetails = new User();
@@ -29,7 +29,17 @@ namespace API_template.Controllers
                 }
             }
 
+            RequestedMessages.Username = log_on_attempt.Username;
             return RequestedMessages;
+        }
+
+        [HttpGet]
+        public UserMessages LogOnAttempt(string userName, string password)
+        {
+            User getUser = new User();
+            getUser.Password = password;
+            getUser.Username = userName;
+            return LogOnAttempt(getUser);
         }
     }
 }

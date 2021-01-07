@@ -7,10 +7,18 @@ namespace API_template
 {
     public class UserMessage
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserMessage"/> class.
+        /// </summary>
         public UserMessage()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserMessage"/> class.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="messageId"></param>
         public UserMessage(string message, string messageId)
         {
             this.Message = message;
