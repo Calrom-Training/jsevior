@@ -1,32 +1,47 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Data.Sqlite;
+﻿// <copyright file="DBconnection.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace API_template
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.Data.Sqlite;
+
+    /// <summary>
+    /// Class for interacting with the database.
+    /// </summary>
     public class DBconnection
     {
-        private string DBConPath { get; }
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DBconnection"/> class.
+        /// </summary>
         public DBconnection()
         {
             this.DBConPath = Environment.CurrentDirectory + "/sqlite database/firstuser.db";
         }
 
+        private string DBConPath { get; }
+
+        /// <summary>
+        /// searches the user details for an entry with the same user name. if there is one then entry is turned into a User object and returned.
+        /// </summary>
+        /// <param name="logondetails">User object.</param>
+        /// <returns>A user object made from the infomation in the database.</returns>
         public User LogOnAttempt(User logondetails)
         {
-            using( var connection = new SqliteConnection("Data Source=" + this.DBConPath))
+            using (var connection = new SqliteConnection("Data Source=" + this.DBConPath))
             {
                 User result = new User();
-                string LogOnTable = "UserDetails";
-                string LogOnCriteria = "Username";
+                string logOnTable = "UserDetails";
+                string logOnCriteria = "Username";
                 connection.Open();
                 var command = connection.CreateCommand();
                 string username = logondetails.Username;
-                command.CommandText = SqlMessage.Message_builder(LogOnTable, LogOnCriteria, logondetails.Username);
+                command.CommandText = SqlMessage.Message_builder(logOnTable, logOnCriteria, logondetails.Username);
                 SqliteDataReader reader = command.ExecuteReader();
 
                 if (reader.HasRows)
@@ -50,6 +65,7 @@ namespace API_template
                 return result;
             }
         }
+
         /// <summary>
         /// uses the primary key of the user to find all of their messages.
         /// </summary>
@@ -87,6 +103,12 @@ namespace API_template
             return result;
         }
 
+        /// <summary>
+        /// compares the given password to the password that is found in the database provides.
+        /// </summary>
+        /// <param name="fromUI">password from the user.</param>
+        /// <param name="fromDB">password from the databse.</param>
+        /// <returns>bool.</returns>
         public bool Password_Checker(string fromUI, string fromDB)
         {
             bool result = false;
@@ -97,6 +119,5 @@ namespace API_template
 
             return result;
         }
-
     }
 }

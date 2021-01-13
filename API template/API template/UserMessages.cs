@@ -6,6 +6,9 @@ namespace API_template
 {
     using System.Collections.Generic;
 
+    /// <summary>
+    /// the class for holding all of a users messages.
+    /// </summary>
     public class UserMessages
     {
         /// <summary>
@@ -17,7 +20,7 @@ namespace API_template
         }
 
         /// <summary>
-        /// gets or sets the boolean of are there any messages for this user.
+        /// Gets or sets a value indicating whether there are any messages for this user.
         /// </summary>
         public bool IsSuccess { get; set; }
 

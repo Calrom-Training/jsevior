@@ -1,14 +1,13 @@
 ﻿// <copyright file="SqlMessage.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace API_template
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     /// <summary>
     /// class for holding parameter and then building the needed sql messages.
     /// </summary>
@@ -37,17 +36,19 @@ namespace API_template
         public string Table { get; set; }
 
         /// <summary>
-        /// uses the input to build a SQL request string.
+        ///  uses the input strings to form a sql request.
         /// </summary>
-        /// <returns>string</returns>
+        /// <param name="table">the wanted table.</param>
+        /// <param name="search_criteria">the where parameter.</param>
+        /// <param name="search_criteria_value"> thevalue of the  where parameter.</param>
+        /// <returns>a sql string.</returns>
         public static string Message_builder(string table, string search_criteria, string search_criteria_value)
         {
             string built_message;
 
-            built_message =$"select * from {table} where {search_criteria}='{search_criteria_value}'";
+            built_message = $"select * from {table} where {search_criteria}='{search_criteria_value}'";
 
             return built_message;
         }
-
     }
 }

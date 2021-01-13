@@ -3,13 +3,13 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from './UserInputDetails';
 import {UserMessages} from './UserDetailsAndMessages';
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map, tap, timeout} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LogOnService {
-  private url = 'localhost:44388/Database'
+  private url = 'https://localhost:44388/Database'
   httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -18,6 +18,7 @@ export class LogOnService {
     const geturl = `${this.url}?/username=${user.Username}&password=${user.password}`
     return this.http.get<UserMessages>(geturl)
     .pipe(
+      timeout(2000),
       catchError(this.handleError<UserMessages>('GetLogOnAttempt'))
     );
   }
@@ -26,6 +27,7 @@ export class LogOnService {
     user.IsSuccess = true;
     user.UserId = 1;
     return this.http.post<User>(this.url, user, this.httpOptions).pipe(
+      timeout(2000),
       catchError(this.handleError<UserMessages>('PostLogOnAttempt'))
     );
   }
