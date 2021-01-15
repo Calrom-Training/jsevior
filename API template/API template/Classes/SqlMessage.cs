@@ -3,11 +3,6 @@
 // </copyright>
 namespace API_template
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-
     /// <summary>
     /// class for holding parameter and then building the needed sql messages.
     /// </summary>
@@ -42,7 +37,7 @@ namespace API_template
         /// <param name="search_criteria">the where parameter.</param>
         /// <param name="search_criteria_value"> thevalue of the  where parameter.</param>
         /// <returns>a sql string.</returns>
-        public static string Message_builder(string table, string search_criteria, string search_criteria_value)
+        public static string MessageBuilder(string table, string search_criteria, string search_criteria_value)
         {
             string built_message;
 

@@ -17,12 +17,12 @@ namespace API_template.Controllers
     [Route("[controller]")]
     public class DatabaseController : ControllerBase
     {
-/// <summary>
-/// using the object posted from the user, the username and password are taken. These details are then passed to the database function LogOnAttempt. The resulting passwords are then compared
-/// and if they match then the GetMessages function is called and the user's messages are grabbed passed back to where the post request came from.
-/// </summary>
-/// <param name="log_on_attempt">object from front that contains the username and password.</param>
-/// <returns>a UserMessages object, either containing the users messages on success or a parameter labeled flase is the details weren't matched.</returns>
+    /// <summary>
+    /// using the object posted from the user, the username and password are taken. These details are then passed to the database function LogOnAttempt. The resulting passwords are then compared
+    /// and if they match then the GetMessages function is called and the user's messages are grabbed passed back to where the post request came from.
+    /// </summary>
+    /// <param name="log_on_attempt">object from front that contains the username and password.</param>
+    /// <returns>a UserMessages object, either containing the users messages on success or a parameter labeled flase is the details weren't matched.</returns>
         [HttpPost]
         public UserMessages LogOnAttempt(User log_on_attempt)
         {

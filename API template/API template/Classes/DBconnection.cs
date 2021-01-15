@@ -41,7 +41,7 @@ namespace API_template
                 connection.Open();
                 var command = connection.CreateCommand();
                 string username = logondetails.Username;
-                command.CommandText = SqlMessage.Message_builder(logOnTable, logOnCriteria, logondetails.Username);
+                command.CommandText = SqlMessage.MessageBuilder(logOnTable, logOnCriteria, logondetails.Username);
                 SqliteDataReader reader = command.ExecuteReader();
 
                 if (reader.HasRows)
@@ -81,7 +81,7 @@ namespace API_template
                 connection.Open();
                 var command = connection.CreateCommand();
                 string userId = userid.ToString();
-                command.CommandText = SqlMessage.Message_builder(messageTable, messageCriteria, userId);
+                command.CommandText = SqlMessage.MessageBuilder(messageTable, messageCriteria, userId);
                 SqliteDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
                 {
@@ -94,6 +94,7 @@ namespace API_template
                 else
                 {
                     result.IsSuccess = false;
+                    result.ListUserMessages.Add(new UserMessage("No messages found", "1"));
                 }
 
                 reader.Close();
