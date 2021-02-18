@@ -31,17 +31,35 @@ namespace API_template
         public string Table { get; set; }
 
         /// <summary>
-        ///  uses the input strings to form a sql request.
+        ///  uses the input strings to form a sql select request.
         /// </summary>
         /// <param name="table">the wanted table.</param>
         /// <param name="search_criteria">the where parameter.</param>
-        /// <param name="search_criteria_value"> thevalue of the  where parameter.</param>
+        /// <param name="search_criteria_value">the value of the  where parameter.</param>
         /// <returns>a sql string.</returns>
-        public static string MessageBuilder(string table, string search_criteria, string search_criteria_value)
+        public static string SelectMessageBuilder(string table, string search_criteria, string search_criteria_value)
         {
             string built_message;
 
             built_message = $"select * from {table} where {search_criteria}='{search_criteria_value}'";
+
+            return built_message;
+        }
+
+        /// <summary>
+        /// uses the input strings to form a sql set request.
+        /// </summary>
+        /// <param name="table">the wanted table.</param>
+        /// <param name="set_criteria">the set parameter.</param>
+        /// <param name="set_criteria_value">the value of the set parameter.</param>
+        /// <param name="search_criteria">the where parameter.</param>
+        /// <param name="search_criteria_value">the value of the  where parameter.</param>
+        /// <returns>a sql string.</returns>
+        public static string UpdateMessageBuilder(string table, string set_criteria, string set_criteria_value, string search_criteria, string search_criteria_value)
+        {
+            string built_message;
+
+            built_message = $"update {table} set {set_criteria} = '{set_criteria_value}' where {search_criteria} = '{search_criteria_value}'";
 
             return built_message;
         }

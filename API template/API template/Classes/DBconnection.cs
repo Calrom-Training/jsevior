@@ -41,7 +41,7 @@ namespace API_template
                 connection.Open();
                 var command = connection.CreateCommand();
                 string username = logondetails.Username;
-                command.CommandText = SqlMessage.MessageBuilder(logOnTable, logOnCriteria, logondetails.Username);
+                command.CommandText = SqlMessage.SelectMessageBuilder(logOnTable, logOnCriteria, logondetails.Username);
                 SqliteDataReader reader = command.ExecuteReader();
 
                 if (reader.HasRows)
@@ -67,6 +67,26 @@ namespace API_template
         }
 
         /// <summary>
+        /// changes the password of a user in the database.
+        /// </summary>
+        /// <param name="password_Change">object containing a user's information and their new password.</param>
+        public void ChangePassword(PasswordChange password_Change)
+        {
+            using (var connection = new SqliteConnection("Data Source=" + this.DBConPath))
+            {
+                string logOnTable = "UserDetails";
+                string logOnCriteria = "Username";
+                string setCriteria = "Password";
+                connection.Open();
+                var command = connection.CreateCommand();
+                command.CommandText = SqlMessage.UpdateMessageBuilder(logOnTable, setCriteria, password_Change.NewPassword, logOnCriteria, password_Change.UserDetails.Username);
+                SqliteDataReader reader = command.ExecuteReader();
+                reader.Close();
+                connection.Close();
+            }
+        }
+
+        /// <summary>
         /// uses the primary key of the user to find all of their messages.
         /// </summary>
         /// <param name="userid">unique identifer of a user.</param>
@@ -81,7 +101,7 @@ namespace API_template
                 connection.Open();
                 var command = connection.CreateCommand();
                 string userId = userid.ToString();
-                command.CommandText = SqlMessage.MessageBuilder(messageTable, messageCriteria, userId);
+                command.CommandText = SqlMessage.SelectMessageBuilder(messageTable, messageCriteria, userId);
                 SqliteDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
                 {

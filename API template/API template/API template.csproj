@@ -5,6 +5,11 @@
     <RootNamespace>API_template</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\Jamie\source\repos\Calrom-Training\jsevior\API template\API template\API template.xml</DocumentationFile>
+    <NoWarn>1701;1702</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.2" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.2" NoWarn="NU1605" />
@@ -16,5 +21,5 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Include="System.Data.SQLite" Version="1.0.113.7" />
   </ItemGroup>
-
+  
 </Project>
