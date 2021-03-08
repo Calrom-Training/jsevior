@@ -4,6 +4,9 @@
 
 namespace API_template
 {
+    using API_template.Services;
+    using API_template.Classes;
+
     /// <summary>
     /// code implementing the IDatabaseConnection interface.
     /// </summary>
@@ -15,6 +18,11 @@ namespace API_template
         public DBconnection Database
         {
             get { return new DBconnection(); }
+        }
+
+        public DatabaseControllerDefinitions Definitions
+        {
+            get { return new DatabaseControllerDefinitions(); }
         }
     }
 }

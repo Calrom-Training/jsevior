@@ -2,8 +2,9 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace API_template
+namespace API_template.Services
 {
+    using API_template.Classes;
     /// <summary>
     /// interface for the DataConnection allowing for dependency injection.
     /// </summary>
@@ -13,5 +14,7 @@ namespace API_template
         /// gets am instance of DBconnection().
         /// </summary>
         DBconnection Database { get; }
+
+        DatabaseControllerDefinitions Definitions { get; }
     }
 }

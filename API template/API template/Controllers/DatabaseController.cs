@@ -4,6 +4,8 @@
 
 namespace API_template.Controllers
 {
+    using API_template.Classes;
+    using API_template.Services;
     using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
@@ -14,14 +16,16 @@ namespace API_template.Controllers
     public class DatabaseController : ControllerBase, IDatabaseController
     {
         private readonly DatabaseConnection database;
+        private readonly DatabaseControllerDefinitions definitions;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DatabaseController"/> class.
         /// </summary>
         /// <param name="database">dependency injected database connection.</param>
-        public DatabaseController(IDatabaseConnection database)
+        public DatabaseController(IDatabaseConnection database, IDatabaseConnection definitions)
         {
             this.database = (DatabaseConnection)database;
+            this.definitions = definitions.Definitions;
         }
 
         /// <summary>
@@ -33,19 +37,7 @@ namespace API_template.Controllers
         [HttpPost]
         public UserMessages LogOnAttempt(User log_on_attempt)
         {
-            User databaseDetails = new User();
-            UserMessages requestedMessages = new UserMessages();
-            databaseDetails = this.database.Database.LogOnAttempt(log_on_attempt);
-            if (databaseDetails.IsSuccess)
-            {
-                if (this.database.Database.Password_Checker(log_on_attempt.Password, databaseDetails.Password))
-                {
-                    requestedMessages = this.database.Database.GetMessages(databaseDetails.UserId);
-                }
-            }
-
-            requestedMessages.Username = log_on_attempt.Username;
-            return requestedMessages;
+            return this.definitions.LogOnAttempt(log_on_attempt, this.database.Database);
         }
 
         /// <summary>
@@ -56,29 +48,7 @@ namespace API_template.Controllers
         [HttpPut]
         public string PasswordChangeAttempt(PasswordChange password_Change)
         {
-            string result;
-            DBconnection db = new DBconnection();
-            User databaseDetails = new User();
-            UserMessages requestedMessages = new UserMessages();
-            databaseDetails = this.database.Database.LogOnAttempt(password_Change.UserDetails);
-            if (databaseDetails.IsSuccess)
-            {
-                if (this.database.Database.Password_Checker(password_Change.UserDetails.Password, databaseDetails.Password))
-                {
-                    this.database.Database.ChangePassword(password_Change);
-                    result = "Your new password has been successfully changed.";
-                }
-                else
-                {
-                    result = "Password was incorrect.";
-                }
-            }
-            else
-            {
-                result = "User could not be found.";
-            }
-
-            return result;
+            return this.definitions.PasswordChangeAttempt(password_Change, this.database.Database);
         }
 
         /// <summary>
@@ -90,10 +60,7 @@ namespace API_template.Controllers
         [HttpGet]
         public UserMessages LogOnAttempt(string userName, string password)
         {
-            User getUser = new User();
-            getUser.Password = password;
-            getUser.Username = userName;
-            return this.LogOnAttempt(getUser);
+           return this.definitions.LogOnAttempt(userName, password, this.database.Database);
         }
     }
 }

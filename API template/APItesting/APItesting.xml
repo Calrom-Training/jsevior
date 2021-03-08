@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>APItesting</name>
+    </assembly>
+    <members>
+        <member name="T:APItesting.MethodUnitTesting">
+            <summary>
+            Unit tests for API_Template methods.
+            </summary>
+        </member>
+        <member name="M:APItesting.MethodUnitTesting.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:APItesting.MethodUnitTesting"/> class. this is an overloaded constructor of the DBconnection object, which allows it to access the database from a different directory.
+            If this is on a different pc to the original, plase change the path to match your local system.
+            </summary>
+        </member>
+        <member name="M:APItesting.MethodUnitTesting.PasswordCheckerTestTrue">
+            <summary>
+            test for the PasswordChecker method.
+            </summary>
+        </member>
+        <member name="M:APItesting.MethodUnitTesting.PasswordCheckerFalseTrue">
+            <summary>
+            test for the PasswordChecker method.
+            </summary>
+        </member>
+        <member name="M:APItesting.MethodUnitTesting.LogonAttemptTester">
+            <summary>
+            Test for the LogOnAttempt method.
+            </summary>
+        </member>
+        <member name="M:APItesting.MethodUnitTesting.LogonAttemptFalseTester">
+            <summary>
+            Test for the LogOnAttempt method.
+            </summary>
+        </member>
+        <member name="M:APItesting.MethodUnitTesting.GetMessagesTester">
+            <summary>
+            test for the GetMessages method.
+            </summary>
+        </member>
+        <member name="M:APItesting.MethodUnitTesting.GetMessagesFalseTester">
+            <summary>
+            test for the GetMessages method.
+            </summary>
+        </member>
+    </members>
+</doc>

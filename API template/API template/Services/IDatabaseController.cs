@@ -2,7 +2,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace API_template.Controllers
+namespace API_template.Services
 {
     /// <summary>
     /// interface for the DatabaseController class.

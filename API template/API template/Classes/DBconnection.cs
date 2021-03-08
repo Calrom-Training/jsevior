@@ -2,7 +2,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace API_template
+namespace API_template.Classes
 {
     using System;
     using System.Collections;
@@ -21,7 +21,17 @@ namespace API_template
         /// </summary>
         public DBconnection()
         {
-            this.DBConPath = Environment.CurrentDirectory + "/sqlite database/firstuser.db";
+            this.DBConPath = Environment.CurrentDirectory + "/sqlite_database/firstuser.db";
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DBconnection"/> class.
+        /// Overloaded constructor for testing purposes. Allows testing solution to access the database from a differenct directory.
+        /// </summary>
+        /// <param name="databasePath">Database path specific to the pc which the tests are being run on.</param>
+        public DBconnection(string databasePath)
+        {
+            this.DBConPath = databasePath;
         }
 
         private string DBConPath { get; }
@@ -41,7 +51,7 @@ namespace API_template
                 connection.Open();
                 var command = connection.CreateCommand();
                 string username = logondetails.Username;
-                command.CommandText = SqlMessage.SelectMessageBuilder(logOnTable, logOnCriteria, logondetails.Username);
+                command.CommandText = SqlMessage.SqlMessageSelector("sqlite", logOnTable, logOnCriteria, logondetails.Username);
                 SqliteDataReader reader = command.ExecuteReader();
 
                 if (reader.HasRows)
@@ -79,7 +89,7 @@ namespace API_template
                 string setCriteria = "Password";
                 connection.Open();
                 var command = connection.CreateCommand();
-                command.CommandText = SqlMessage.UpdateMessageBuilder(logOnTable, setCriteria, password_Change.NewPassword, logOnCriteria, password_Change.UserDetails.Username);
+                command.CommandText = SqlMessage.SqlMessageSelector("sqlite", logOnTable, setCriteria, password_Change.NewPassword, logOnCriteria, password_Change.UserDetails.Username);
                 SqliteDataReader reader = command.ExecuteReader();
                 reader.Close();
                 connection.Close();
@@ -101,7 +111,7 @@ namespace API_template
                 connection.Open();
                 var command = connection.CreateCommand();
                 string userId = userid.ToString();
-                command.CommandText = SqlMessage.SelectMessageBuilder(messageTable, messageCriteria, userId);
+                command.CommandText = SqlMessage.SqlMessageSelector("sqlite", messageTable, messageCriteria, userId);
                 SqliteDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
                 {

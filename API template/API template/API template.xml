@@ -1,0 +1,328 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>API template</name>
+    </assembly>
+    <members>
+        <member name="T:API_template.DatabaseConnection">
+            <summary>
+            code implementing the IDatabaseConnection interface.
+            </summary>
+        </member>
+        <member name="P:API_template.DatabaseConnection.Database">
+            <summary>
+            Gets the database connection.
+            </summary>
+        </member>
+        <member name="T:API_template.Classes.DBconnection">
+            <summary>
+            Class for interacting with the database.
+            </summary>
+        </member>
+        <member name="M:API_template.Classes.DBconnection.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:API_template.Classes.DBconnection"/> class.
+            </summary>
+        </member>
+        <member name="M:API_template.Classes.DBconnection.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:API_template.Classes.DBconnection"/> class.
+            Overloaded constructor for testing purposes. Allows testing solution to access the database from a differenct directory.
+            </summary>
+            <param name="databasePath">Database path specific to the pc which the tests are being run on.</param>
+        </member>
+        <member name="M:API_template.Classes.DBconnection.LogOnAttempt(API_template.User)">
+            <summary>
+            searches the user details for an entry with the same user name. if there is one then entry is turned into a User object and returned.
+            </summary>
+            <param name="logondetails">User object.</param>
+            <returns>A user object made from the infomation in the database.</returns>
+        </member>
+        <member name="M:API_template.Classes.DBconnection.ChangePassword(API_template.PasswordChange)">
+            <summary>
+            changes the password of a user in the database.
+            </summary>
+            <param name="password_Change">object containing a user's information and their new password.</param>
+        </member>
+        <member name="M:API_template.Classes.DBconnection.GetMessages(System.Int32)">
+            <summary>
+            uses the primary key of the user to find all of their messages.
+            </summary>
+            <param name="userid">unique identifer of a user.</param>
+            <returns>UserMessages object which contains the user name, a success key and a list of all of the messages for the user.</returns>
+        </member>
+        <member name="M:API_template.Classes.DBconnection.Password_Checker(System.String,System.String)">
+            <summary>
+            compares the given password to the password that is found in the database provides.
+            </summary>
+            <param name="fromUI">password from the user.</param>
+            <param name="fromDB">password from the databse.</param>
+            <returns>bool.</returns>
+        </member>
+        <member name="T:API_template.Classes.SqliteMessage">
+            <summary>
+            class for holding parameter and then building the needed sql messages.
+            </summary>
+        </member>
+        <member name="M:API_template.Classes.SqliteMessage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:API_template.Classes.SqliteMessage"/> class.
+            </summary>
+        </member>
+        <member name="P:API_template.Classes.SqliteMessage.Search_criteria">
+            <summary>
+            gets or sets the Search Criteria of the sql message.
+            </summary>
+        </member>
+        <member name="P:API_template.Classes.SqliteMessage.Search_criteria_value">
+            <summary>
+            gets or sets the Search Criteria Value of the sql message.
+            </summary>
+        </member>
+        <member name="P:API_template.Classes.SqliteMessage.Table">
+            <summary>
+            gets or sets the table of the sql request.
+            </summary>
+        </member>
+        <member name="M:API_template.Classes.SqliteMessage.SelectMessageBuilder(System.String,System.String,System.String)">
+            <summary>
+             uses the input strings to form a sql select request.
+            </summary>
+            <param name="table">the wanted table.</param>
+            <param name="search_criteria">the where parameter.</param>
+            <param name="search_criteria_value">the value of the  where parameter.</param>
+            <returns>a sql string.</returns>
+        </member>
+        <member name="M:API_template.Classes.SqliteMessage.UpdateMessageBuilder(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            uses the input strings to form a sql set request.
+            </summary>
+            <param name="table">the wanted table.</param>
+            <param name="set_criteria">the set parameter.</param>
+            <param name="set_criteria_value">the value of the set parameter.</param>
+            <param name="search_criteria">the where parameter.</param>
+            <param name="search_criteria_value">the value of the  where parameter.</param>
+            <returns>a sql string.</returns>
+        </member>
+        <member name="T:API_template.PasswordChange">
+            <summary>
+            object to contain both a user's details and the new password they wish.
+            </summary>
+        </member>
+        <member name="M:API_template.PasswordChange.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:API_template.PasswordChange"/> class.
+            </summary>
+        </member>
+        <member name="P:API_template.PasswordChange.NewPassword">
+            <summary>
+            Gets or sets the new password.
+            </summary>
+        </member>
+        <member name="P:API_template.PasswordChange.UserDetails">
+            <summary>
+            Gets or sets the user's details.
+            </summary>
+        </member>
+        <member name="T:API_template.User">
+            <summary>
+            class to store user info.
+            </summary>
+        </member>
+        <member name="M:API_template.User.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:API_template.User"/> class.
+            </summary>
+        </member>
+        <member name="P:API_template.User.IsSuccess">
+            <summary>
+            Gets or sets a value indicating whether IsSuccess is true or false.
+            </summary>
+        </member>
+        <member name="P:API_template.User.Username">
+            <summary>
+            Gets or sets the string Username.
+            </summary>
+        </member>
+        <member name="P:API_template.User.Password">
+            <summary>
+            Gets or sets the string Password.
+            </summary>
+        </member>
+        <member name="P:API_template.User.UserId">
+            <summary>
+            Gets or sets the int UserId.
+            </summary>
+        </member>
+        <member name="T:API_template.UserMessage">
+            <summary>
+            Class for hold an individual user message.
+            </summary>
+        </member>
+        <member name="M:API_template.UserMessage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:API_template.UserMessage"/> class.
+            </summary>
+        </member>
+        <member name="M:API_template.UserMessage.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:API_template.UserMessage"/> class.
+            </summary>
+            <param name="message">the text of the message.</param>
+            <param name="messageId">the message id.</param>
+        </member>
+        <member name="P:API_template.UserMessage.Message">
+            <summary>
+            Gets or sets the string message.
+            </summary>
+        </member>
+        <member name="P:API_template.UserMessage.MessageID">
+            <summary>
+            Gets or sets the string messageid.
+            </summary>
+        </member>
+        <member name="T:API_template.UserMessages">
+            <summary>
+            the class for holding all of a users messages.
+            </summary>
+        </member>
+        <member name="M:API_template.UserMessages.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:API_template.UserMessages"/> class.
+            </summary>
+        </member>
+        <member name="P:API_template.UserMessages.IsSuccess">
+            <summary>
+            Gets or sets a value indicating whether there are any messages for this user.
+            </summary>
+        </member>
+        <member name="P:API_template.UserMessages.Username">
+            <summary>
+            gets or sets the Username.
+            </summary>
+        </member>
+        <member name="P:API_template.UserMessages.ListUserMessages">
+            <summary>
+            gets or sets the list of user messages.
+            </summary>
+        </member>
+        <member name="T:API_template.Controllers.DatabaseController">
+            <summary>
+            controller for the api.
+            </summary>
+        </member>
+        <member name="M:API_template.Controllers.DatabaseController.#ctor(API_template.Services.IDatabaseConnection,API_template.Services.IDatabaseConnection)">
+            <summary>
+            Initializes a new instance of the <see cref="T:API_template.Controllers.DatabaseController"/> class.
+            </summary>
+            <param name="database">dependency injected database connection.</param>
+        </member>
+        <member name="M:API_template.Controllers.DatabaseController.LogOnAttempt(API_template.User)">
+            <summary>
+            using the object posted from the user, the username and password are taken. These details are then passed to the database function LogOnAttempt. The resulting passwords are then compared
+            and if they match then the GetMessages function is called and the user's messages are grabbed passed back to where the post request came from.
+            </summary>
+            <param name="log_on_attempt">object from front that contains the username and password.</param>
+            <returns>a UserMessages object, either containing the users messages on success or a parameter labeled flase is the details weren't matched.</returns>
+        </member>
+        <member name="M:API_template.Controllers.DatabaseController.PasswordChangeAttempt(API_template.PasswordChange)">
+            <summary>
+            changes a users password after checking they have the correct information.
+            </summary>
+            <param name="password_Change">an object that contains a user's details and their new password.</param>
+            <returns>a string that lets the user know the status of their request.</returns>
+        </member>
+        <member name="M:API_template.Controllers.DatabaseController.LogOnAttempt(System.String,System.String)">
+            <summary>
+            HTTP get version of the HttpPost LogOnAttempt. uses the values from a get request to form an object and then passes it through the HTTP post LogOnAttempt above.
+            </summary>
+            <param name="userName">username.</param>
+            <param name="password">password.</param>
+            <returns>user messages.</returns>
+        </member>
+        <member name="T:API_template.Program">
+            <summary>
+            Program generated by api template.
+            </summary>
+        </member>
+        <member name="M:API_template.Program.Main(System.String[])">
+            <summary>
+            main.
+            </summary>
+            <param name="args">template generated, unknown currently.</param>
+        </member>
+        <member name="M:API_template.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            configures web builder using the startup file.
+            </summary>
+            <param name="args"> template generated, unknown currently.</param>
+            <returns>the startup settings for the api.</returns>
+        </member>
+        <member name="T:API_template.Services.IDatabaseConnection">
+            <summary>
+            interface for the DataConnection allowing for dependency injection.
+            </summary>
+        </member>
+        <member name="P:API_template.Services.IDatabaseConnection.Database">
+            <summary>
+            gets am instance of DBconnection().
+            </summary>
+        </member>
+        <member name="T:API_template.Services.IDatabaseController">
+            <summary>
+            interface for the DatabaseController class.
+            </summary>
+        </member>
+        <member name="M:API_template.Services.IDatabaseController.LogOnAttempt(System.String,System.String)">
+            <summary>
+            function to try and log on a user using strings.
+            </summary>
+            <param name="userName">username.</param>
+            <param name="password">password.</param>
+            <returns>a users info.</returns>
+        </member>
+        <member name="M:API_template.Services.IDatabaseController.LogOnAttempt(API_template.User)">
+            <summary>
+            function to try and log on a user using a User object.
+            </summary>
+            <param name="log_on_attempt">user object.</param>
+            <returns>a users info.</returns>
+        </member>
+        <member name="M:API_template.Services.IDatabaseController.PasswordChangeAttempt(API_template.PasswordChange)">
+            <summary>
+            function to try and change a user's password using a PasswordChange object.
+            </summary>.
+            <param name="password_Change">PasswordChange object.</param>
+            <returns>a string that contains the result of the password change attempt.</returns>
+        </member>
+        <member name="T:API_template.Startup">
+            <summary>
+            startup method.
+            </summary>
+        </member>
+        <member name="M:API_template.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:API_template.Startup"/> class.
+            </summary>
+            <param name="configuration">unknown detils, generated by template.</param>
+        </member>
+        <member name="P:API_template.Startup.Configuration">
+            <summary>
+            Gets the Configuration.
+            </summary>
+        </member>
+        <member name="M:API_template.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services">unknown detils, generated by template.</param>
+        </member>
+        <member name="M:API_template.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app">unknown detils, generated by template.</param>
+            <param name="env">unknown detils, generated by the template.</param>
+        </member>
+    </members>
+</doc>
